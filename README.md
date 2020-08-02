@@ -13,3 +13,6 @@
 '너 자신을 알라'
 
 라는 좋은 말을 되새기며, 내 미래를 위해 나아갈 방향을 새롭게 생각하고 있다.
+
+6주차 정리 유투브
+https://www.youtube.com/watch?v=q3TKx6tzUkA&t=2s
