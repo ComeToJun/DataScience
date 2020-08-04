@@ -1,0 +1,666 @@
+plt.plot([x,] y [,fmt])
+x 와 y 는 시퀀스 데이터, 길이가 같아야 함
+x 를 생략하면 0부터 y 의 수만큼 증가 
+fmt는 포맷
+
+파이썬의 mat 라이브러리도 QT를 사용
+
+간단히 요약하자면 QT라는 GUI 화면 만들어 주는 도구를 원래 파이썬에서 사용할 수 없는 C++용이였는데 
+어떤 회사가 친절하게도 파이썬에서도 사용할 수 있게 변환 툴을 만들어 줘서 우리는 파이썬과 QT를 이용해서 
+더 빠르게 원하는 것을 뚝딱 만들어 낼 수 있게 되었다는 것
+
+data1 = [10,14,19,29,25]
+
+plt.plot(data1)
+plt.show()
+
+
+
+
+x = np.arange(-4.5, 5, 0.5)
+y1 = 2 * x ** 2
+y2 = 5 * x + 30
+y3 = 4 * x ** 2 + 10
+
+plt.plot(x, y1)
+plt.plot(x, y1)
+plt.plot(x, y1)
+plt.show()
+# plt.plot(x, y1, x, y2, x, y3)
+# 이렇게도 가능
+
+plt.plot(x, y1)
+plt.figure()	<<<<- 분리하고 싶은 그래프가 있을때 사용
+plt.plot(x, y2)
+plt.plot(x, y3)
+plt.show()
+
+---------------------------------------------------------------------------------------------
+
+x = np.arange(-5, 5, 0.1)
+y1 = x ** 2 - 2
+y2 = 20 * np.cos(x) ** 2   #Numpy 에서 cos() 는 np.cos() 로 입력
+
+plt.figure(1)  #1번 그래프 창 생성
+plt.plot(x, y1)  # 지정된 그래프 창에 그래프 그림
+
+plt.figure(2)   #2번 그래프 창 생성
+plt.plot(x, y2)   # 지정된 그래프 창에 그래프 그림
+
+plt.figure(1)  # 이미 생성된 1번 그래프 창을 지정함
+plt.plot(x, y2)   # 지정된 그래프 창에 그래프를 그림
+
+plt.figure(2)  # 이미 생성된 2번 그래프 창을 지정
+plt.clf()   # 2번 그래프 창에 그려진 모든 그래프를 지움
+plt.plot(x, y1)   # 지정된 그래프 창에 그래프를 그림
+
+plt.show()
+
+
+plt.subplot(m ,n, p) m = row , n = column
+
+m X n 행렬의 그래프 영역 중 p번째 위치
+p는 왼쪽 -> 오른쪽, 위 -> 아래
+
+------------------------------------------------------------------------------------------------
+
+x = np.arange(0, 10, 0.1)
+y1 = 0.3 * (x-5) ** 2 + 1
+y2 = -1.5 * x + 3
+y3 = np.sin(x) ** 2   # Numpy 에서 sin() 은 np.sin() 으로 입력
+y4 = 10 * np.exp(-x) + 1 # Numpy 에서 exp() 는 np.exp() 로 입력
+
+# 2 x 2 행렬로 이뤄진 하위 그래프에서 p에 따라 위치를 지정
+plt.subplot(2, 2, 1) # p 는 1
+plt.plot(x, y1)
+
+plt.subplot(2, 2, 2)  # p 는 2
+plt.plot(x, y2)
+
+plt.subplot(2, 2, 3)  # p 는 3
+plt.plot(x, y3)
+
+plt.subplot(2, 2, 4)   # p 는 4
+plt.plot(x, y4)
+
+plt.show()
+
+-----------------------------------------------------------------------------------------------
+
+x = np.linspace(-4, 4, 100) # [-4, 4]범위에서 100개의 값 생성
+y1 = x ** 3
+y2 = 10 * x ** 2 - 2
+
+plt.plot(x, y1, x, y2)
+plt.show()
+
+
+plt.plot(x, y1, x, y2)
+plt.xlim(-1, 1)  <<-
+plt.ylim(-3, 3)  <<-
+plt.show()
+
+plot 을 하고 show 하기 전에 x 와 y 에 limit 을 주면 보고 싶은 부분을 확대해서 보고싶을때 가능.
+
+fmt = '[color][line_style][marker]'
+
+----------------------------------------------------------------------------------------------------
+
+x = np.arange(0, 5, 1)
+y1 = x
+y2 = x + 1
+y3 = x + 2
+y4 = x + 3
+
+plt.plot(x, y1, x, y2, x, y3, x, y4)
+plt.show()
+
+x = np.arange(0, 5, 1)
+y1 = x
+y2 = x + 1
+y3 = x + 2
+y4 = x + 3
+
+plt.plot(x, y1, 'm', x, y2, 'y', x, y3, 'k', x, y4, 'c')  **알파벳이 나타내는 색이 따로 있음
+plt.show()
+
+x = np.arange(0, 5, 1)
+y1 = x
+y2 = x + 1
+y3 = x + 2
+y4 = x + 3
+
+plt.plot(x, y1, '-', x, y2, '--', x, y3, ':', x, y4, '-.')    **라인의 스타일을 바꿔줄 수 있음
+plt.show()
+
+
+x = np.arange(0, 5, 1)
+y1 = x
+y2 = x + 1
+y3 = x + 2
+y4 = x + 3
+
+plt.plot(x, y1, 'o', x, y2, '^', x, y3, 's', x, y4, 'd')    ** 라인에 마크를 줘서 표시 가능
+plt.show()
+
+x = np.arange(0, 5, 1) **변화를 주면 그래프 점이 바뀔 수 있다.
+y1 = x
+y2 = x + 1
+y3 = x + 2
+y4 = x + 3
+
+plt.plot(x, y1, '>--r', x, y2, 's-g', x, y3, 'd:b', x, y4, '-.Xc') ** 순서 상관없이 섞어서 사용 가능
+plt.show()
+
+
+https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html?highlight=plot#matplotlib.pyplot.plot
+위 사이트에서 전부 확인 가능
+
+---------------------------------------------------------------------------------------------------------
+
+
+label 지정
+
+x = np.arange(-4.5, 5, 0.5)
+y = 2 * x ** 3
+
+plt.plot(x, y)
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.title('Graph title')
+plt.grid(True) # 기본 default 값이 True 임 -> 엑셀처럼 표 모양으로 나오게 만들어줌
+plt.show()
+
+--------------------------------------------------------------------------------------------------------
+
+legend (범례) 예시하여 모범으로 삼는 것.
+
+x = np.arange(0, 5 ,1)
+y1 = x
+y2 = x + 1
+y3 = x + 2
+y4 = x + 3
+
+plt.plot(x, y1, '>--r', x, y2, 's-g', x, y3, 'd:b', x, y4, '-.Xc')
+plt.legend(['data1', 'data2', 'data3', 'data4'], loc = 'lower right') <<- 오른쪽 밑에 data1,2,3,4 모양을 걸어줌
+plt.show()						** 0 or best 가 최적을 찾아주는 기본값
+
+https://matplotlib.org/api/_as_gen/matplotlib.pyplot.legend.html#matplotlib.pyplot.legend
+위 사이트에 자세히 나와있음
+
+--------------------------------------------------------------------------------------------------------
+
+matplotlib.rcParams['font.family'] = 'Malgun Gothic'	** 한글 폰트 설정 but - 일때 깨짐 현상 발생
+matplotlib.rcParams['axes.unicode_minus'] = False	** 그때 필요한게 이 코드 ( 깨짐 현상 없애줌)
+						** 이하 밑의 모든 코드에 필요함		
+
+** 항상 2개를 같이 쓴다고 생각할것
+
+x = np.arange(0, 5 ,1)
+y1 = x
+y2 = x + 1
+y3 = x + 2
+y4 = x + 3
+
+plt.plot(x, y1, '>--r', x, y2, 's-g', x, y3, 'd:b', x, y4, '-.Xc')
+plt.legend(['data1', 'data2', 'data3', 'data4'], loc = 0)
+plt.xlabel('X 축')
+plt.ylabel('Y 축')
+plt.title('그래프 제목')
+plt.grid(True)
+plt.show()
+
+-----------------------------------------------------------------------------------------------------------
+
+fruit = ['사과', '바나나', '딸기', '오렌지', '포도']
+result = [7, 6, 3, 2, 2]
+plt.pie(result)
+plt.show()
+
+pie = 원형 그래프 만들어 주는 메서드
+
+
+fruit = ['사과', '바나나', '딸기', '오렌지', '포도']
+result = [7, 6, 3, 2, 2]
+plt.pie(result, labels=fruit, autopct='%.1f%%')  <<- labels 를 fruit로 붙여주고, 숫자 뒤에 %를 붙이겠다.
+plt.show()
+
+x 축을 기준으로 0도에서 시작해서 반시계방향으로 움직이며 각 그래프를 표현
+
+
+fruit = ['사과', '바나나', '딸기', '오렌지', '포도']
+result = [7, 6, 3, 2, 2]
+plt.pie(result, labels=fruit, autopct='%.1f%%', startangle=90, counterclock=False) <<- 시작은 90도 시계방향으로 움직이며 그래프 표현
+plt.show()
+
+
+fruit = ['사과', '바나나', '딸기', '오렌지', '포도']
+result = [7, 6, 3, 2, 2]
+explode_value = (0.1, 0,0,0,0)
+plt.pie(result, labels=fruit, autopct='%.1f%%', startangle=90, counterclock=False,
+        explode=explode_value, shadow=True) <<- 강조(다른 그래프와 분리됨) 와 그림자 효과를 주겠다.
+plt.show()
+
+----------------------------------------------------------------------------------------------
+
+print(matplotlib.rcParams['figure.figsize'])  # 사이즈 확인
+print(matplotlib.rcParams['figure.dpi'])
+
+fruit = ['사과', '바나나', '딸기', '오렌지', '포도']
+result = [7, 6, 3, 2, 2]
+explode_value = (0.1, 0,0,0,0)
+plt.figure(figsize=(5,5))
+plt.pie(result, labels=fruit, autopct='%.1f%%', startangle=90, counterclock=False,
+        explode=explode_value, shadow=True)
+plt.savefig('C:/Users/user/PycharmProjects/saveFigTest1.png', dpi=100)
+plt.show()
+
+** 다시 설명 듣기
+
+-------------------------------------------------------------------------------------------------
+
+pandas 에도 그림 그리는 기능이 있다.
+pandas 로 그릴때도 matplotlib 으로 그려야 하기 때문에 import 필요함
+
+
+s1 = pd.Series([1,2,3,4,5,6,7,8,9,10])
+print(s1)
+s1.plot()
+plt.show()
+
+#비례형 직선 그래프
+** y축이 Seires 에 있는 값 즉 밸류
+** x축이 index (기본)
+
+s1 = pd.Series([1,2,3,4,5,6,7,8,9,10],
+               index=pd.date_range('2019-01-01', periods=10))  # index 를 따로 지정해서 나타낼 수 있다.
+print(s1)
+s1.plot() -> s1.plot(grid=True) # 그리드 옵션 따로 줄 수 있음
+plt.show()
+
+-------------------------------------------------------------------------------------------------------
+
+matplotlib.rcParams['font.family'] = 'Malgun Gothic'
+matplotlib.rcParams['axes.unicode_minus'] = False
+
+df_rain = pd.read_csv('C:/Users/user/Desktop/Month 2/data/sea_rain1_from_notepad.csv',
+                      index_col='연도', encoding='cp949')
+
+df_rain.plot() 
+plt.show()
+
+x축이 index 값이라는걸 명심할 것.
+
+
+df_rain = pd.read_csv('C:/Users/user/Desktop/Month 2/data/sea_rain1_from_notepad.csv',
+                      index_col='연도', encoding='cp949')
+df_rain.plot(grid=True, style = ['r--*', 'g-o', 'b:*', 'm-.p']) << - 선이나 글자색 바꾸기 메서드 () 안에 넣어서 변환 가능
+plt.show()
+
+------------------------------------------------------------------------------------------------------------
+
+temperature = [25.2, 27.4, 22.9, 26.2, 29.5, 33.1, 30.4, 36.1, 34.4, 29.1]
+Ice_cream_sales = [236500, 357500, 203500, 365200, 446600,
+                   574200, 453200, 675400, 598400, 463100]
+
+dict_data = {'기온': temperature, '아이스크림 판매량': Ice_cream_sales}
+df_ice_cream = pd.DataFrame(dict_data, columns=['기온', '아이스크림 판매량'])
+
+print(df_ice_cream)
+df_ice_cream.plot.scatter(x='기온', y='아이스크림 판매량',
+                          grid=True, title='최고 기온과 아이스크림 판매량')
+
+plt.show()
+
+**scatter 는 매칭되는 곳에 점만 찍어주는 것. 연관관계만 보는 것. 따로 선이나 글자색을 넣어도 바뀌지 않는다.
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+pandas 에서 막대그래프 그리는 법
+
+students = [5, 14, 12, 3]
+grade_num = ["A", 'B', 'C', 'D']
+df_grade = pd.DataFrame(students, index=grade_num, columns=['Students'])
+print(df_grade)
+
+grade_bar = df_grade.plot.bar(grid=True) # 코드 나타내는 표현
+grade_bar.set_xlabel("학점")
+grade_bar.set_ylabel("학생수")
+grade_bar.set_title("학생별 학생 수 막대 그래프")
+plt.show()
+
+students = [5, 14, 12, 3]
+grade_num = ["A", 'B', 'C', 'D']
+df_grade = pd.DataFrame(students, index=grade_num, columns=['Students'])
+print(df_grade)
+
+grade_bar = df_grade.plot.bar(grid=True, rot=0) ( ** rot=0 은 x축 알파벳 모양을 제대로 나오게 해줌 )
+grade_bar.set_xlabel("학점")
+grade_bar.set_ylabel("학생수")
+grade_bar.set_title("학생별 학생 수 막대 그래프")
+plt.show()
+------------------------------------------------------------------------------------------------------------------------
+
+math = [76, 82, 84, 83, 90, 86, 85, 92, 72, 71,
+        100, 97, 81, 76, 94, 78, 81, 60, 79, 69, 74, 87, 82, 68, 79]
+
+df_math = pd.DataFrame(math, columns=['Student'])
+
+math_hist = df_math.plot.hist(bins=8, grid=True)
+math_hist.set_xlabel("시험 점수")
+math_hist.set_ylabel("도수(frequency)")
+math_hist.set_title("수학 시험의 히스토그램")
+
+plt.show()
+
+---------------------------------------------------------------------------------------------------------------
+
+pandas 로 pi 그리기
+
+
+fruit = ['사과', '바나나', '딸기', '오렌지', '포도']
+result = [7, 6, 3, 2, 2]
+
+df_fruit = pd.Series(result, index=fruit, name='선택한 학생수')
+print(df_fruit)
+
+explode_value = (0.1, 0,0,0,0)
+fruit_pie = df_fruit.plot.pie(figsize=(5,5), autopct='%.1f%%', startangle=90,
+                              counterclock=False, explode=explode_value, shadow=True, table=True)  <<- table 은 밑에 따로 table 만들어 결과치를 표로 표현해줌
+
+fruit_pie.set_ylabel("") # 불필요한 y 축 라벨 제거
+fruit_pie.set_title("과일 선호도 조사 결과")
+plt.show()
+
+-------------------------------------------------------------------------------------------------------------------
+
+Web scraping 
+Web crawiling 복제식으로 다 가져온다.
+
+우리가 원하는건 원하는 데이터만 잘라서 가져온다.
+
+그래서 crawiling 보다는 scraping 의 의미가 더 가깝다.
+
+
+client 가 요청하는 쪽 request / web browser
+server 가 요청을 받아서 응답을 해주는 쪽 response / sofware
+
+클라이언트 서버 개념은 극히 상대적인 개념
+만약 서버쪽에서 다른곳에 다시 요청을해서 무언가를 받아오면 서버가 클라이언트가 되어버림
+
+서버라는 것도 문맥에 맞게 이해해야 하는 부분이 있음
+
+서로간의 이용에 있어서 약속을 해놓는다. (프로토콜) protocol
+
+서버와 클라이언트과 서로 정보를 주고 받기 위해서는 정해진 프로토콜이 필요하다.
+
+TCP / IP 를 기반으로 시작해서 만들어낸게 internet (TCP/IP기반으로 움직인다.)
+
+
+여러가지 통신 서비스가 올라가는데,
+
+
+HTTP / 주소를 입력해서 들어갈때 기본으로 붙는다. 통신하는데 있어서 서버와 클라이언트의 약속
+TCP
+IP
+phisical layer
+
+
+
+
+서버 머신 입장에서 보자
+
+PORT 기본적으로 웹서버는 바꾸지 않는한 80 port 를 사용한다.
+예를 들어 8000 이라고 입력되면, 8000port 의 주소로 가야한다.
+
+---------------------------------------------------------------------------------------------------------------
+
+노트패드를 이용해서 http 코드를 적어 웹 브라우저에 직접 구현해보기
+
+구현한 웹 브라우저에서 소스 코드 확인해보기
+
+python consol 에서 작업해보기 ( 좋은점은 print 없이 바로 결과 확인이 가능하다)
+
+
+---------------------------------------------------------------------------------------------------------------
+
+beautifulsoup4 파싱해주는 프레임워크
+lmxl parser 해주는 라이브러리
+
+from bs4 import BeautifulSoup
+
+html = """<html><body><div><span>
+        <a href=http://www.naver.com>naver</a>	# 앞에 있는 a 가 태그명
+        <a href=https://www.google.com>google</a>
+        <a href=http://www.daum.net/>daum</a>
+        </span></div></body></html>"""
+
+# BeautifulSoup 를 이용해 HTML 소스를 파싱
+soup = BeautifulSoup(html, 'lxml')  # 'lxml' 은 파서 (스트링 이름으로 주게 되어있다)
+print(soup)
+
+
+만약
+print(soup.prettify()) 이렇게 코딩할시
+<html>
+ <body>
+  <div>
+   <span>
+    <a href="http://www.naver.com">
+     naver
+    </a>
+    <a href="https://www.google.com">
+     google
+    </a>
+    <a href="http://www.daum.net/">
+     daum
+    </a>
+   </span>
+  </div>
+ </body>
+</html>
+조금 더 보기 편하게 출력한다.
+
+---------------------------------------------------------------------------------------------------------------
+
+
+print(soup.find('a')) a 찾는 메서드 입력시
+
+<a href="http://www.naver.com">naver</a>
+
+---------------------------------------------------
+print(soup.find('a').get_text()) text 를 가져오면
+
+naver
+
+----------------------------------------------------
+
+site_names = soup.find_all('a')  #태그명에서 찾는 것
+for site_name in site_names:
+    print(site_name.get_text())
+
+naver
+google
+daum
+
+--------------------------------------------------------
+
+
+html2 = """
+<html>
+ <head>
+  <title> 작품과 작가 모음</title>
+ </head>
+ <body>
+  <h1> 책 정보 </h1>
+  <p id="book_title">토지</p>
+  <p id="author">박경리</p>
+
+  <p id="book_title">태백산맥</p>
+  <p id="author">조정래</p>
+  
+  <p id="book_title">감옥으로부터의 사색</p>
+  <p id="author">신영복</p>
+ </body>
+</html>
+"""
+
+soup2 = BeautifulSoup(html2, 'lxml')
+print(soup2.title)
+print(soup2.body)
+print(soup2.body.h1)
+
+
+<title> 작품과 작가 모음</title>
+
+
+<body>
+<h1> 책 정보 </h1>
+<p id="book_title">토지</p>
+<p id="author">박경리</p>
+<p id="book_title">태백산맥</p>
+<p id="author">조정래</p>
+<p id="book_title">감옥으로부터의 사색</p>
+<p id="author">신영복</p>
+</body>
+
+
+<h1> 책 정보 </h1>
+
+----------------------------------------------------------------------------------------------------
+
+print(soup2.find('p', {"id":"book_title"})) <<- 첫번째만 찾아준다.
+print(soup2.find('p', {"id":"author"}))
+
+<p id="book_title">토지</p>
+<p id="author">박경리</p>
+
+----------------------------------------------------------------------------------------------------
+
+print(soup2.find_all('p', {"id":"book_title"})) <<- 전부 갖고 오기
+print(soup2.find_all('p', {"id":"author"}))
+
+
+[<p id="book_title">토지</p>, <p id="book_title">태백산맥</p>, <p id="book_title">감옥으로부터의 사색</p>]
+[<p id="author">박경리</p>, <p id="author">조정래</p>, <p id="author">신영복</p>]
+
+
+----------------------------------------------------------------------------------------------------
+
+book_titles = soup2.find_all('p', {"id":"book_title"})
+authors = soup2.find_all('p', {"id":"author"})
+
+for book_title, author in zip(book_titles, authors):
+    print(book_title.get_text() + '/' + author.get_text())
+
+토지/박경리
+태백산맥/조정래
+감옥으로부터의 사색/신영복
+
+----------------------------------------------------------------------------------------------------
+
+print(soup2.select('body h1'))  <<- body 안의 h1
+
+[<h1> 책 정보 </h1>]
+
+print(soup2.select('body p'))   <<- body 안의 p 전부 갖고옴
+
+[<p id="book_title">토지</p>, <p id="author">박경리</p>, <p id="book_title">태백산맥</p>, 
+<p id="author">조정래</p>, <p id="book_title">감옥으로부터의 사색</p>, <p id="author">신영복</p>]
+
+
+print(soup2.select('p#book_title'))   <<- p안에 id 가 book_title 인놈
+[<p id="book_title">토지</p>, <p id="book_title">태백산맥</p>, <p id="book_title">감옥으로부터의 사색</p>]
+
+
+print(soup2.select('p#author'))   <<- p안에 id 가 author 인놈
+[<p id="author">박경리</p>, <p id="author">조정래</p>, <p id="author">신영복</p>]
+
+----------------------------------------------------------------------------------------------------------
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>사이트 모음</title>
+</head>
+<body>
+<p id="title">
+<b>자주 가는 사이트 모음</b>
+</p>
+<p id="content"> 이곳은 자주 가는 사이트를 모아둔 곳입니다.</p>
+<a href="http://www.naver.com" class="portal" id="naver">네이버</a> <br>
+<a href="https://www.google.com" class="search" id="google">구글</a> <br>
+<a href="http://www.daum.com" class="portal" id="daum">다음</a> <br>
+<a href="http://www.nl.go.kr" class="government" id="nl">국립중앙도서관</a> <br>
+</body>
+</html>
+
+****html 
+
+f = open("D:/JunPython/notepadd_workspace/change.html", encoding='utf-8')
+
+html3 = f.read()
+f.close()
+
+soup3 = BeautifulSoup(html3, "lxml")
+print(soup3.select('a.portal'))
+
+[<a class="portal" href="http://www.naver.com" id="naver">네이버</a>, 
+<a class="portal" href="http://www.daum.com" id="daum">다음</a>]
+
+
+
+soup3.select('html body a')
+soup3.select('body a')
+soup3.select('html a')
+soup3.select('a'
+
+같은 값이 출력된다.
+
+-----------------------------------------------------------------------------------------------------------
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>줄 바꿈 테스트 예제</title>
+</head>
+<body>
+<p id="title"><b>대한민국헌법</b></p>
+<p id="content"> 제 1조 <br/> 대한민국은 민주공화국이다. <br/> 대한민국의 주권은 국민에게 있고, 
+모든 권력은 국민으로부터 나온다.</p>
+<p id="content"> 제 2조 <br/> 대한민국의 국민이 되는 요건은 법률로 정한다. <br/> 국가는 법률이 정하는 바에 의하여
+재외국민을 보호할 의무를 진다.</p>
+</body>
+</html>
+
+<!--<p> 태크는 텍스트의 내용을 새로운 단락으로 시작하게 함  (Http 주석표시하는 방법)
+</br> 태크는 문장에서 줄 바꿈을 함-->
+
+
+----------------------------------------------------------------------------------------------------------
+
+
+f = open("D:/JunPython/notepadd_workspace/change.html", encoding='utf-8')
+
+html3 = f.read()
+f.close()
+
+soup = BeautifulSoup(html3, 'lxml')
+
+
+title = soup.find('p', {"id": "title"})   <<- title 은 하나이기 때문에 find all 이 필요없다.
+contents = soup.find_all('p', {"id":"content"})    
+
+print(title.get_text())
+for content in contents:
+    print(content.get_text())
+
+
+대한민국헌법
+ 제 1조  대한민국은 민주공화국이다.  대한민국의 주권은 국민에게 있고, 
+모든 권력은 국민으로부터 나온다.
+ 제 2조  대한민국의 국민이 되는 요건은 법률로 정한다.  국가는 법률이 정하는 바에 의하여
+재외국민을 보호할 의무를 진다.
