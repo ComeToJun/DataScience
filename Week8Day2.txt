@@ -1,0 +1,357 @@
+p = re.compile(r'\w[0-9]+')  <- 소문자 w
+# 알파벳 숫자 언더바 중에 하나가 올 수 있다.
+
+**
+
+print(p.match('f95956'))
+print(p.match('_95956'))
+print(p.match('95956'))
+print(p.match('-95956'))
+
+**
+
+<re.Match object; span=(0, 6), match='f95956'>
+<re.Match object; span=(0, 6), match='_95956'>
+<re.Match object; span=(0, 5), match='95956'>
+None
+
+---------------------------------------------------------------------------------------------------------
+
+p = re.compile(r'\W[0-9]+') <- 대문자 W
+# 알파벳 숫자 언더바 가 아닌 것들만 올 수 있다.
+
+print(p.match('234556'))
+print(p.match('+234556'))
+
+None
+<re.Match object; span=(0, 7), match='+234556'>
+
+-------------------------------------------------------------------------------------------------
+
+a(aa)*
+
+= [a, aaa, aaaaa]  <- 단독 문자가 아닌 그룹으로만 나올 수 있음
+
+(aa)*
+
+= [ 빈문자, aa, aaaa] <- 그룹으로 가능 (뒤에 있는 별표에 대해서 그룹으로 움직인다)
+
+
+p = re.compile(r'^(a|b)[0-9]+')
+# 시작은 a 또는 b 그다음이 0-9 숫자가 올 수 있음
+print(p.match('a9878'))
+print(p.match('c9878'))
+
+<re.Match object; span=(0, 5), match='a9878'>
+None
+
+# 대괄호 밖의 ^ = 문자열의 스타트, $ 문자열의 엔드
+
+p = re.compile(r'^(ab|cd)[0-9]+')
+
+print(p.match('ab9878'))
+print(p.match('cd9878'))
+
+<re.Match object; span=(0, 6), match='ab9878'>
+<re.Match object; span=(0, 6), match='cd9878'>
+
+--------------------------------------------------------------------------------------------------
+
+p = re.compile(r"<(h[1-6])>[가-힣\w\s']+</\1>")
+# 꺽새로 시작하고 h 다음 1-6 까지 나올 수 있다. 꺽새 닫고,
+# 한글이 오거나, 알파벳 숫자 언더바 혹은 스페이스 혹은 ' 도 올 수 있다 (문자 그대로 안에 있는게 나올 수 있다.)
+# / 는 보통 html 문법에서 꺽새 안에서 코드를 닫을때 필요한 문자
+# \n = n번째 그룹 즉, \1 첫번째 그룹을 뜻함 첫번째 그룹의 값이 똑같이 나와서 닫아야 함
+
+***
+
+print(p.match('<h1> 이것은 첫 번째 제목 </h1>'))
+print(p.match("<h4>It's also right heading</h4>)"))
+print(p.match("<h5>이것은 올바르지 않은 제목</h6>)"))
+
+****
+
+<re.Match object; span=(0, 22), match='<h1> 이것은 첫 번째 제목 </h1>'>
+<re.Match object; span=(0, 32), match="<h4>It's also right heading</h4>">
+None
+
+
+------------------------------------------------------------------------------------------------------
+
+p = re.compile(r"^[\w.%+\-]+@[\w.\-]+\.[A-Za-z]{2,3}$")
+
+# 첫번째 문자는 알파벳 숫자 언더바 중에 하나가 올 수 있거나 . 이나 %, +, - 가 올 수 있고,
+# 골뱅이 뒤에 대괄호 뒤에 있는게 하나 이상 나와야 하고 (하나 이상 즉, 무한대 가능 뜻: +)
+## ( 0개도 가능 혹은 무한대 가능 : *)
+# 알파벳, 숫자 언더바 중 하나가 오거나, . , - 이 온다.
+# . 을 찍고 A-z 중 2개나 3개가 와서 마무리.
+
+
+이메일 만드는거 가능
+
+
+
+--------------------------------------------------------------------------------------------------
+
+10문제 넘파이 판다스
+5문제는 파이썬 시험 본거에서 다시 가져옴
+
+넘파이 써서 arange()
+써서 만들거 결과값 써주기 [ ] 이거 꼭 넣어주기
+np.arange(3) 
+array([0, 1, 2]) 
+
+np.arange(3.0) 
+array([ 0., 1., 2.]) 
+
+np.arange(3,7) 
+array([3, 4, 5, 6]) 
+
+np.arange(3,7,2) 
+array([3, 5])
+
+내용만 적지 말고 리스트로 감싸주는거 적을 것.
+
+*************************************************
+
+reshape 했을때 결과 어떻게 나오는지 (2차원)
+
+x = np.arange(20)   # x는 1차원 배열이다.
+x 
+array([ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19])
+
+
+x.reshape(4,5) # x를 (4,5) 2차원으로 바꾼 배열을 리턴한다. 
+array([[ 0, 1, 2, 3, 4], 
+        [ 5, 6, 7, 8, 9], 
+        [10, 11, 12, 13, 14], 
+        [15, 16, 17, 18, 19]])
+
+*****************************************************
+
+linspace 했을때 결과 어떻게 나오는지
+
+시작점과 끝점을 균일 간격으로 나눈 점들을 생성해주는 linspace()함수.
+
+c = np.linspace(0, 1, 6)   # start, end, num-points 
+c
+array([ 0. , 0.2, 0.4, 0.6, 0.8, 1. ])
+
+d = np.linspace(0, 1, 5, endpoint=False)
+d
+array([ 0. , 0.2, 0.4, 0.6, 0.8]
+
+**************************************************************
+
+numpy 에서 만드는 특수한 배열 몇가지
+ - 제로스 원스 아이 .. 등등 중 하나 냈음
+
+import numpy as np
+ 
+a = np.zeros((2,2))
+print(a)
+# 출력:
+# [[ 0.  0.]
+#  [ 0.  0.]]
+
+a = np.ones((2,3))
+print(a)
+# 출력:
+# [[ 1.  1.  1.]
+#  [ 1.  1.  1.]]
+
+a = np.full((2,3), 5)
+print(a)
+# 출력:
+# [[5 5 5]
+#  [5 5 5]]
+
+a = np.eye(3)
+print(a)
+# 출력:
+# [[ 1.  0.  0.]
+#  [ 0.  1.  0.]
+#  [ 0.  0.  1.]]
+
+
+******************************************************************
+
+numpy 메서드 중에 누적합 누적곱 있었음 그 중 하나 나옴
+
+누적곱
+
+np.cumprod(e)  # [1, 1*2, 1*2*3, 1*2*3*4]
+array([ 1, 2, 6, 24], dtype=int32)
+
+np.cumprod(f, axis=0)  # [[1, 2, 3], [1*4, 2*5, 3*6]]  ↓
+array([[ 1,  2,  3],
+        [ 4, 10, 18]], dtype=int32)
+
+np.cumprod(f, axis=1)  # [[1, 1*2, 1*2*3], [4, 4*5, 4*5*6]]  →
+array([[  1,   2,   6],
+        [  4,  20, 120]], dtype=int32)
+
+누적합
+
+e
+array([1, 2, 3, 4])
+
+np.cumsum(a, axis) : Return the cumulative sum of the elements along a given axis
+
+np.cumsum(e)  # [1, 1+2, 1+2+3, 1+2+3+4]
+array([ 1,  3,  6, 10], dtype=int32)
+
+f
+array([[1, 2, 3],
+        [4, 5, 6]])
+
+np.cumsum(f, axis=0)  # [[1, 2, 3], [1+4, 2+5, 3+6]]  ↓
+array([[1, 2, 3],
+        [5, 7, 9]], dtype=int32)
+
+np.cumsum(f, axis=1)  # [[1, 1+2, 1+2+3], [4, 4+5, 4+5+6]]  →
+array([[ 1,  3,  6],
+        [ 4,  9, 15]], dtype=int32)
+
+**************************************************************************************
+
+전치행렬 tranpoce 결과 어떻게 나오는지
+ ** 대괄호 빼먹지 말것
+2차원 배열은 대괄호 안에 대괄호 또 
+***행렬의 행과 열을 바꾸기, 행렬의 축을 바꾸는 방법
+
+import numpy as np
+
+a = np.arange(15).reshape(3, 5)
+a
+array([[ 0,  1,  2,  3,  4],
+        [ 5,  6,  7,  8,  9],
+        [10, 11, 12, 13, 14]])
+
+ 
+
+transposing 2D array : T attribute
+
+np.transpose(a)
+array([[ 0,  5, 10],
+        [ 1,  6, 11],
+        [ 2,  7, 12],
+        [ 3,  8, 13],
+        [ 4,  9, 14]])
+
+**********************************************************************************
+
+
+pandas series 출력시 인덱스가 같이 나온다. 인덱스 밸류 나옴
+가장 간단한 1차원 자료구조인 Series는 배열/리스트와 같은 일련의 시퀀스 데이타를 받아들이는데, 
+별도의 인덱스 레이블을 지정하지 않으면 자동적으로 0부터 시작되는 디폴트 정수 인덱스를 사용한다
+
+import pandas as pd
+ 
+data = [1, 3, 5, 7, 9]
+s = pd.Series(data)
+
+s
+0 1
+1 3
+2 5
+3 7
+4 9
+
+**********************************************************************************
+
+dataframe 결과 쓰기
+
+2차원 자료구조인 DataFrame는 행과 열이 있는 테이블 데이타(Tabular Data)를 받아들이는데, 
+아래 예제는 그 한가지 방법으로서 열(column)을 dict의 Key로, 행(row)을 dict의 Value로 
+한 Dictionary 데이타를 pd.DataFrame()을 사용하여 pandas의 Data Frame 자료구조로 변환한 예이다.
+
+import pandas as pd
+ 
+data = {
+    'year': [2016, 2017, 2018],
+    'GDP rate': [2.8, 3.1, 3.0],
+    'GDP': ['1.637M', '1.73M', '1.83M']
+}
+ 
+df = pd.DataFrame(data)
+
+df
+   year GDPrate GDP
+0 2016      2.8  1.637M
+1 2017      3.1   1.73M
+2 2018      3.0   1.83M
+
+
+*******************************************************************************************
+
+pandas dataframe 중 merge 나옴 merge 했을때 결과 쓰기
+
+import pandas as pd
+from pandas import DataFrame
+
+df_left = DataFrame({'KEY': ['K0', 'K1', 'K2', 'K3'], 'A': ['A0', 'A1', 'A2', 'A3'], 'B': ['B0', 'B1', 'B2', 'B3']})
+df_right = DataFrame({'KEY': ['K2', 'K3', 'K4', 'K5'], 'C': ['C2', 'C3', 'C4', 'C5'], 'D': ['D2', 'D3', 'D4', 'D5']})
+
+df_left
+    A   B KEY
+0  A0  B0  K0
+1  A1  B1  K1
+2  A2  B2  K2
+3  A3  B3  K3
+
+df_right
+    C   D KEY
+0  C2  D2  K2
+1  C3  D3  K3
+2  C4  D4  K4
+3  C5  D5  K5
+
+-----------------------
+
+'how' 의 left, right, inner, outer 별로 위에서 만든 
+'df_left'와 'df_right' 두 개의 DataFrame을 'KEY' 변수를 기준으로 merge 한다.
+
+df_merge_how_left = pd.merge(df_left, df_right, how='left', on='KEY')
+
+df_merge_how_left
+    A   B   KEY   C     D
+0  A0  B0  K0  NaN  NaN
+1  A1  B1  K1  NaN  NaN
+2  A2  B2  K2   C2   D2
+3  A3  B3  K3   C3   D3
+
+df_merge_how_right = pd.merge(df_left, df_right, how='right', on='KEY')
+
+df_merge_how_right
+     A    B  KEY   C   D
+0   A2   B2  K2  C2  D2
+1   A3   B3  K3  C3  D3
+2  NaN  NaN  K4  C4  D4
+3  NaN  NaN  K5  C5  D5
+
+df_merge_how_inner = pd.merge(df_left, df_right, how='inner', on='KEY')
+
+df_merge_how_inner
+    A   B KEY   C   D
+0  A2  B2  K2  C2  D2
+1  A3  B3  K3  C3  D3
+
+df_merge_how_outer = pd.merge(df_left, df_right, how='outer', on='KEY')
+
+ df_merge_how_outer
+     A    B  KEY    C    D
+0   A0   B0  K0  NaN  NaN
+1   A1   B1  K1  NaN  NaN
+2   A2   B2  K2   C2   D2
+3   A3   B3  K3   C3   D3
+4  NaN  NaN  K4   C4   D4
+5  NaN  NaN  K5   C5   D5
+
+
+*********************************************************************************************
+
+
+나머지 5문제는
+파이썬에서 골라 냈음 ( 비중 있는 문제로 고름 )
+
